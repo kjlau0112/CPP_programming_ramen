@@ -94,9 +94,7 @@ int main() {
     DefectView defectView;
 
     DefectController defectController(defectModel, defectView);
-
-    defectController.addDefect("WTF", "Unexpected behavior observed.");  // Add new defect
-    defectController.showDefectComponent("WTF");                         
+                    
     std::cout << '\n';
     defectController.showDefectSummary();                                
     std::cout << '\n';
