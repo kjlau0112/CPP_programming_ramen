@@ -41,6 +41,18 @@ class DefectView {
             std::cout << "(" + p.first + ", " + p.second + ")\n";
         }
     }
+
+    void viewRant(const std::unordered_map<std::string, std::string>& defects) const
+    {
+        for (const auto& p: defects) {
+            if (p.first == "WHAT ?")
+            {
+                std::cout << "System error should have  details oriented" <<std::endl;
+                break;
+            }
+        }
+    }
+
 };
 
 class DefectController {
@@ -65,7 +77,13 @@ class DefectController {
     // New method to add a defect
     void addDefect(const std::string& name, const std::string& description) {
         defectModelRef.addDefect(name, description);
-    }    
+    }
+
+    void controllerRant()
+    {
+        defectViewRef.viewRant(defectModelRef.getAllDefects());
+    }
+    
 };
 
 int main() {
@@ -76,13 +94,15 @@ int main() {
     DefectView defectViewInstance;
 
     DefectController defectController(defectModelInstance, defectViewInstance);
-          
+
+    defectController.addDefect("WHAT ?", "Unexpected behavior observed.");  // Add new defect
+    defectController.showDefectComponent("WHAT ?");      
     std::cout << '\n';
     defectController.showDefectSummary();                                
     std::cout << '\n';
     defectController.showDefectList();                                   
 
     std::cout << '\n';
-
+    defectController.controllerRant();
     return 0;
 }
